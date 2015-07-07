@@ -1,0 +1,56 @@
+
+
+typedef enum
+{
+
+	UI_STATION= 0 ,
+	UI_ISSUE ,
+
+	UI_PART_NO,
+	UI_ISSUE_ACK,
+	UI_CLEAR_ISSUE,
+	UI_PASSWORD,
+	UI_ADMIN_ACTIVITY,
+	UI_BRK_QUA_MS,
+	UI_ISSUE_RESOLVE
+	
+
+}UI_STATE;
+
+
+
+
+	
+	
+enum
+{
+	UI_MSG_STATION = 0,
+	UI_MSG_ISSUE,
+	UI_MSG_SAFETY,
+	UI_MSG_BREAKDOWN,
+	UI_MSG_QUALITY,
+	UI_MSG_METHODS,
+	UI_MSG_PRODUCTION,
+	UI_MSG_MATERIAL,
+	UI_MSG_PART_NO,
+	UI_MSG_PASSWORD,
+	UI_MSG_ADMIN_ACTIVITY,
+	UI_MSG_CLEAR_ISSUES
+
+	
+};
+		
+
+enum
+{
+	ISSUE_0 = 0,
+	ISSUE_1 ,
+	ISSUE_2,
+	ISSUE_3
+};
+
+extern const rom UINT8 *UI_MSG[];
+
+void UI_init(void);
+void UI_task(void);
+void UI_setState( UI_STATE state);
