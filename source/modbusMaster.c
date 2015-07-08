@@ -401,7 +401,7 @@ void process_F1_F2()
         		bytes_processed++;
         		index += 2;
       		}
-      		register_array[packet->local_start_address + i] = temp;
+      		register_array[i] = temp;
     	}
 
     	processSuccess(); 

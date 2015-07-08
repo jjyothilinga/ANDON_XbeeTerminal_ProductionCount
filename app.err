@@ -1,6 +1,6 @@
-Warning[2054] D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\source\app.c 327 : suspicious pointer conversion
-Warning[2054] D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\source\app.c 327 : suspicious pointer conversion
-Warning[2054] D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\source\app.c 890 : suspicious pointer conversion
-Warning[2054] D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\source\app.c 1073 : suspicious pointer conversion
-Warning[2054] D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\source\app.c 1073 : suspicious pointer conversion
-Warning[2054] D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\source\app.c 1165 : suspicious pointer conversion
+Warning[2054] D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\source\app.c 328 : suspicious pointer conversion
+Warning[2054] D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\source\app.c 328 : suspicious pointer conversion
+Warning[2068] D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\source\app.c 354 : obsolete use of implicit 'int' detected
+Warning[2054] D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\source\app.c 897 : suspicious pointer conversion
+Warning[2054] D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\source\app.c 1096 : suspicious pointer conversion
+Warning[2054] D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\source\app.c 1096 : suspicious pointer conversion

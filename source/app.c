@@ -78,6 +78,7 @@ typedef struct _APP
 	UINT8 	state;
 	UINT8 	issues_raised, issues_critical;
 	UINT32 	preAppTime,curAppTime;
+	UINT32 	preCheckCoilTime;
 	UINT8 	stationCount[2];
 	UINT8 	password[5];
 	UINT8 	logonPassword[5];
@@ -87,7 +88,7 @@ typedef struct _APP
 	INT8 	buzzerTimeout;
 	UINT8	regCount[MAX_LOG_ENTRIES];     // Buffer used to hold the number of 16bits counts in data pack
 	// register used to get PLC coil status to reset production count
-	UINT16 	coilStatus;		
+	UINT16 	coilStatus[1];		
 	UINT16	productionCount;		
 	UINT8 	sendMBdata;	
 }APP;																			//This object contains all the varibles used in this application
@@ -124,7 +125,7 @@ static rom UINT16 timeout = (UINT16)150;
 *------------------------------------------------------------------------------
 */
 
-static void updateLog(far UINT8* data);
+static void updateLog(far UINT8* data, UINT8 command);
 static void updateIndication(BOOL issueResolved,BOOL issueRaised,BOOL issueCritical,BOOL buzIndication);	//Switches the indicators
 INT8 issueResolved(far UINT8* data);
 static BOOL update_timeouts(void);
@@ -330,7 +331,7 @@ BOOL APP_logout(far UINT8 *password,far UINT8 *data)
 
 	updateIndication(grn,org,red,buz);
 
-	updateLog(data);
+//	updateLog(data);
 /*
 	Write_b_eep(LOGON_STATUS, 0);
 	Busy_eep();
@@ -350,6 +351,7 @@ BOOL APP_logout(far UINT8 *password,far UINT8 *data)
 */
 void APP_task(void)
 {
+	static sensor_on = TRUE;
 	UINT8 i,*ptr, data;
 	UINT8 buffer[4] = {'0'};
 	UINT32 addr;
@@ -396,21 +398,26 @@ void APP_task(void)
 
 	}
 
-	if(ias.coilStatus == TRUE)
+	if(ias.coilStatus[0] == TRUE)
 	{
-		ias.productionCount = 0x1234;
+		ias.productionCount = 0X00;
 		handleProductionCount(buffer);
 		//itoa(ias.productionCount, ias.countBuffer,16);
-		updateLog(buffer);	
+		updateLog(buffer,CMD_PRODUCTION_COUNT);	
+		ias.coilStatus[0] = 0;
 	}
-	else if(PROXIMITY_SENSOR == TRUE)
+	
+/*	if( PROXIMITY_SENSOR == TRUE && sensor_on == TRUE)
 	{
 		ias.productionCount++;
 		handleProductionCount(buffer);
 		//itoa(ias.productionCount, ias.countBuffer,16);
-		updateLog(buffer);
+		updateLog(buffer,CMD_PRODUCTION_COUNT);
+		sensor_on = FALSE;
 	}
-	
+	else if ( PROXIMITY_SENSOR == FALSE && sensor_on == FALSE )
+		sensor_on = TRUE;
+*/
 
 	//used to handle log write and read coil status to reset production count
 	handleMBwrite( );
@@ -585,8 +592,8 @@ void APP_resolveIssues(UINT8 id)
 			issueIndex = issueResolved(data);
 			if(  issueIndex != -1)
 			{
-				storeCMDinBuffer(data, CMD_RESOLVE_ISSUE);
-				updateLog(data);
+				//storeCMDinBuffer(data, CMD_RESOLVE_ISSUE);
+				updateLog(data, CMD_RESOLVE_ISSUE);
 				memset(ias.issues[issueIndex].data , 0 , MAX_KEYPAD_ENTRIES + 1);
 							
 				ClrWdt();
@@ -616,8 +623,8 @@ void APP_resolveIssues(UINT8 id)
 			issueIndex = issueResolved(data);
 			if(  issueIndex != -1)
 			{
-				storeCMDinBuffer(data, CMD_RESOLVE_ISSUE);
-				updateLog(data);
+				//storeCMDinBuffer(data, CMD_RESOLVE_ISSUE);
+				updateLog(data, CMD_RESOLVE_ISSUE);
 				memset(ias.issues[issueIndex].data , 0 , MAX_KEYPAD_ENTRIES + 1);
 							
 				ClrWdt();
@@ -721,8 +728,8 @@ void APP_raiseIssues(far UINT8* data)
             {
 			  updateIndication(0,1,1,1);
 			}
-			storeCMDinBuffer(data, CMD_RAISE_ISSUE);
-			updateLog(data);
+			//storeCMDinBuffer(data, CMD_RAISE_ISSUE);
+			updateLog(data, CMD_RAISE_ISSUE);
 			break;
 		}
 	}
@@ -741,8 +748,8 @@ void resolveIssue(far UINT8* data)
 	UINT8 *ptr;
 	if( data[2] == '0')
 	{
-		storeCMDinBuffer(data, CMD_RESOLVE_ISSUE);
-		updateLog(data);
+		//storeCMDinBuffer(data, CMD_RESOLVE_ISSUE);
+		updateLog(data, CMD_RESOLVE_ISSUE);
 		return;
 	}
 
@@ -926,8 +933,8 @@ void APP_acknowledgeIssues(UINT8 ID)
 	UINT8 i;
 	ias.issues[ID].ackStatus = 0;
 
-	storeCMDinBuffer(ias.issues[ID].data, CMD_ACKNOWLEDGE_ISSUE);
-	updateLog(ias.issues[ID].data);
+	//storeCMDinBuffer(ias.issues[ID].data, CMD_ACKNOWLEDGE_ISSUE);
+	updateLog(ias.issues[ID].data, CMD_ACKNOWLEDGE_ISSUE);
 
 	
 
@@ -955,23 +962,39 @@ void APP_acknowledgeIssues(UINT8 ID)
 *	void updateLog(void)
 *----------------------------------------------------------------------------------------------------------------
 */
-void updateLog(far UINT8 *data)
+void updateLog(far UINT8 *data, UINT8 command)
 {
 	UINT8 i = 0;
-	while( *data != '\0')
+
+	if( command == CMD_PRODUCTION_COUNT)
 	{
-		log.entries[log.index][i] = (UINT16)*data << 8;
-		data++;
-		if(*data == '\0')
+		for( i = 0; i < 2; i++ )
 		{
-			log.entries[log.index][i] |= (UINT16) 0x00;
-			i++;
-			break;
-		}
-		else
+			log.entries[log.index][i] = (UINT16)*data << 8;
+			data++;
 			log.entries[log.index][i] |= (UINT16)*data;
-		data++;
-		i++;
+			data++;
+		}
+
+	}
+	else
+	{
+		log.entries[log.index][i] = (UINT16) command  << 8;
+	
+		while( *data != '\0')
+		{
+			log.entries[log.index][i] |= (UINT16)*data;
+			data++;
+			i++;
+			if(*data == '\0')
+			{
+				log.entries[log.index][i] = (UINT16) 0x00;
+				break;
+			}
+			else
+				log.entries[log.index][i] = (UINT16)*data  << 8;
+			data++;
+		}
 	}
 	log.entries[log.index][i]= '\0';
 	ias.regCount[log.index] = i;
@@ -1160,11 +1183,15 @@ void handleMBwrite(void)
 			break;
 	
 			case CHECK_COIL_STATUS:
-			// read the coil status to reset count to zero
-			MB_construct(&packets[PACKET1], SLAVE_ID, READ_HOLDING_REGISTERS, 
-								STARTING_ADDRESS, 1, ias.coilStatus);	
+			if( (GetAppTime() - ias.preCheckCoilTime) > 5 )
+			{
+				// read the coil status to reset count to zero
+				MB_construct(&packets[PACKET1], SLAVE_ID, READ_COIL_STATUS, 
+									STARTING_ADDRESS, 1, ias.coilStatus);
+				ias.preCheckCoilTime = GetAppTime();	
+				
+			}
 			ias.sendMBdata = SEND_LOG;
-
 			break;
 		
 		}
@@ -1183,7 +1210,7 @@ void storeCMDinBuffer(UINT8 *buffer, UINT8 command)
 	INT8 i = 0;
 
 	while(buffer[i++] != '\0');
-	buffer[i] = '0';
+	buffer[i+1] = '\0';
 
 	for(; i > 0; i--)
 		buffer[i] = buffer[i-1];
@@ -1195,7 +1222,8 @@ void storeCMDinBuffer(UINT8 *buffer, UINT8 command)
 void handleProductionCount(UINT8 *buffer)
 {
 	buffer[0] = CMD_PRODUCTION_COUNT;
-	buffer[1] = (UINT8) ias.productionCount;
+	buffer[1] = '\0';
 	buffer[2] = (UINT8) (ias.productionCount >> 8) & 0XFF;
-	buffer[3] = '\0';
+	buffer[3] = (UINT8) ias.productionCount;
+
 }
