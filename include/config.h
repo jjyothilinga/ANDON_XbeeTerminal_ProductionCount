@@ -79,9 +79,9 @@ enum
 /*---------------------------------
 *	MODBUS MASTER CONFIGURATION
 ----------------------------------*/
-#define BAUD_RATE	 		9600
+#define BAUD_RATE	 		19200
 #define TIMEOUT		 		1
-#define POLLING 			5 // the scan rate
+#define POLLING 			1 // the scan rate
 #define RETRY_COUNT			2
 #define SLAVE_ID			1
 #define STARTING_ADDRESS	0

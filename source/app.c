@@ -407,7 +407,7 @@ void APP_task(void)
 		ias.coilStatus[0] = 0;
 	}
 	
-/*	if( PROXIMITY_SENSOR == TRUE && sensor_on == TRUE)
+	if( PROXIMITY_SENSOR == FALSE && sensor_on == TRUE)
 	{
 		ias.productionCount++;
 		handleProductionCount(buffer);
@@ -415,9 +415,9 @@ void APP_task(void)
 		updateLog(buffer,CMD_PRODUCTION_COUNT);
 		sensor_on = FALSE;
 	}
-	else if ( PROXIMITY_SENSOR == FALSE && sensor_on == FALSE )
+	else if ( PROXIMITY_SENSOR == TRUE && sensor_on == FALSE )
 		sensor_on = TRUE;
-*/
+
 
 	//used to handle log write and read coil status to reset production count
 	handleMBwrite( );
@@ -994,6 +994,7 @@ void updateLog(far UINT8 *data, UINT8 command)
 			else
 				log.entries[log.index][i] = (UINT16)*data  << 8;
 			data++;
+			
 		}
 	}
 	log.entries[log.index][i]= '\0';

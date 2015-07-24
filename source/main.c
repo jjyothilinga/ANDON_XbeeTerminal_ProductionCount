@@ -250,7 +250,7 @@ void main(void)
 
 		//ClrWdt();
 
-	if( appUpdateCount >= 500 )
+	if( appUpdateCount >= 50 )
 	{
 		APP_task();
 		appUpdateCount = 0;

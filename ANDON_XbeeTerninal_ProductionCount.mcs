@@ -13,7 +13,7 @@ SOLK=<src>|source\app.c|source\board.c|source\heartBeat.c|source\interruptvector
 SuiteArgsString=
 ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
-DebugOptions=-D__DEBUG
+DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_PK3=1
 [File001]
 Location=D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\obj\board.o
 Folder=Intermediary
@@ -26,7 +26,7 @@ SOLK=<src>|source\app.c|source\board.c|source\heartBeat.c|source\interruptvector
 SuiteArgsString=
 ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
-DebugOptions=-D__DEBUG
+DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_PK3=1
 [File002]
 Location=D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\obj\heartBeat.o
 Folder=Intermediary
@@ -39,7 +39,7 @@ SOLK=<src>|source\app.c|source\board.c|source\heartBeat.c|source\interruptvector
 SuiteArgsString=
 ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
-DebugOptions=-D__DEBUG
+DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_PK3=1
 [File003]
 Location=D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\obj\interruptvector.o
 Folder=Intermediary
@@ -52,7 +52,7 @@ SOLK=<src>|source\app.c|source\board.c|source\heartBeat.c|source\interruptvector
 SuiteArgsString=
 ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
-DebugOptions=-D__DEBUG
+DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_PK3=1
 [File004]
 Location=D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\obj\keypad.o
 Folder=Intermediary
@@ -65,7 +65,7 @@ SOLK=<src>|source\app.c|source\board.c|source\heartBeat.c|source\interruptvector
 SuiteArgsString=
 ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
-DebugOptions=-D__DEBUG
+DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_PK3=1
 [File005]
 Location=D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\obj\lcd.o
 Folder=Intermediary
@@ -78,7 +78,7 @@ SOLK=<src>|source\app.c|source\board.c|source\heartBeat.c|source\interruptvector
 SuiteArgsString=
 ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
-DebugOptions=-D__DEBUG
+DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_PK3=1
 [File006]
 Location=D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\obj\main.o
 Folder=Intermediary
@@ -91,7 +91,7 @@ SOLK=<src>|source\app.c|source\board.c|source\heartBeat.c|source\interruptvector
 SuiteArgsString=
 ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
-DebugOptions=-D__DEBUG
+DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_PK3=1
 [File007]
 Location=D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\obj\timer.o
 Folder=Intermediary
@@ -104,7 +104,7 @@ SOLK=<src>|source\app.c|source\board.c|source\heartBeat.c|source\interruptvector
 SuiteArgsString=
 ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
-DebugOptions=-D__DEBUG
+DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_PK3=1
 [File008]
 Location=D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\obj\uart.o
 Folder=Intermediary
@@ -117,7 +117,7 @@ SOLK=<src>|source\app.c|source\board.c|source\heartBeat.c|source\interruptvector
 SuiteArgsString=
 ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
-DebugOptions=-D__DEBUG
+DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_PK3=1
 [File009]
 Location=D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\obj\UI.o
 Folder=Intermediary
@@ -130,7 +130,7 @@ SOLK=<src>|source\app.c|source\board.c|source\heartBeat.c|source\interruptvector
 SuiteArgsString=
 ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
-DebugOptions=-D__DEBUG
+DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_PK3=1
 [File010]
 Location=D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\obj\modbusMaster.o
 Folder=Intermediary
@@ -143,7 +143,7 @@ SOLK=<src>|source\app.c|source\board.c|source\heartBeat.c|source\interruptvector
 SuiteArgsString=
 ToolArgsString=-Ou- -Ot- -Ob- -Op- -Or- -Od- -Opa-
 TraceCmdString=
-DebugOptions=-D__DEBUG
+DebugOptions=-D__DEBUG -D__MPLAB_DEBUGGER_PK3=1
 [File011]
 Location=D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\output\ANDON_XbeeTerninal_ProductionCount.cof
 Folder=Output
@@ -156,7 +156,7 @@ SOLK=<src>|source\app.c|source\board.c|source\heartBeat.c|source\interruptvector
 SuiteArgsString=
 ToolArgsString=/o"$(BINDIR_)$(TARGETBASE).cof" /M"$(BINDIR_)$(TARGETBASE).map" /W
 TraceCmdString=
-DebugOptions=/z__MPLAB_DEBUG=1
+DebugOptions=/z__MPLAB_DEBUG=1 /z__MPLAB_DEBUGGER_PK3=1 /z__ICD2RAM=1
 [File012]
 Location=D:\jo\Ideonics\Repository\ANDON_XbeeTerminal_ProductionCount\output\ANDON_XbeeTerninal_ProductionCount.hex
 Folder=Output
@@ -169,7 +169,7 @@ SOLK=<src>|source\app.c|source\board.c|source\heartBeat.c|source\interruptvector
 SuiteArgsString=
 ToolArgsString=/o"$(BINDIR_)$(TARGETBASE).cof" /M"$(BINDIR_)$(TARGETBASE).map" /W
 TraceCmdString=
-DebugOptions=/z__MPLAB_DEBUG=1
+DebugOptions=/z__MPLAB_DEBUG=1 /z__MPLAB_DEBUGGER_PK3=1 /z__ICD2RAM=1
 [TOOL_LOC_STAMPS]
 tool_loc{96C98149-AA1B-4CF9-B967-FAE79CAB663C}=C:\Program Files\Microchip\mplabc18\v3.46\bin\mplink.exe
 tool_loc{E56A1C86-9D32-4DF6-8C34-FE0388B1B644}=C:\Program Files\Microchip\mplabc18\v3.46\bin\mcc18.exe
