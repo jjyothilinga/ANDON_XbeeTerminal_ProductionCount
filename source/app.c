@@ -351,7 +351,7 @@ BOOL APP_logout(far UINT8 *password,far UINT8 *data)
 */
 void APP_task(void)
 {
-	static sensor_on = TRUE;
+	static BOOL sensor_on = TRUE;
 	UINT8 i,*ptr, data;
 	UINT8 buffer[4] = {'0'};
 	UINT32 addr;
@@ -409,11 +409,15 @@ void APP_task(void)
 	
 	if( PROXIMITY_SENSOR == FALSE && sensor_on == TRUE)
 	{
-		ias.productionCount++;
-		handleProductionCount(buffer);
-		//itoa(ias.productionCount, ias.countBuffer,16);
-		updateLog(buffer,CMD_PRODUCTION_COUNT);
-		sensor_on = FALSE;
+		DelayMs(5);
+		if( PROXIMITY_SENSOR == FALSE )
+		{
+			ias.productionCount++;
+			handleProductionCount(buffer);
+			//itoa(ias.productionCount, ias.countBuffer,16);
+			updateLog(buffer,CMD_PRODUCTION_COUNT);
+			sensor_on = FALSE;
+		}
 	}
 	else if ( PROXIMITY_SENSOR == TRUE && sensor_on == FALSE )
 		sensor_on = TRUE;
